@@ -1,0 +1,11 @@
+---
+interface Props {
+  fill?: boolean;
+}
+
+const props = Astro.props;
+---
+
+<div class="text-xl" class:list={[{ "flex-1": props.fill }]}>
+  <slot name="content" />
+</div>

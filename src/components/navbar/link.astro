@@ -1,0 +1,17 @@
+---
+import NavbarItem from "./navbar-item.astro";
+interface Props {
+  href: string;
+}
+
+const props = Astro.props;
+---
+
+<NavbarItem>
+  <a
+    slot="content"
+    href={props.href}
+    class="my-0 border-l border-l-gray-700 p-4 text-xl hover:bg-gray-600"
+    ><slot /></a
+  >
+</NavbarItem>
