@@ -1,0 +1,40 @@
+---
+import Navbar from "../components/navbar.astro";
+import { type Link as NavbarLink } from "../components/navbar.astro";
+interface Props {
+  title?: string;
+}
+
+let { title } = Astro.props;
+
+const links: NavbarLink[] = [
+  { href: "/about", text: "About" },
+  { href: "/blog", text: "Blog" },
+];
+
+title = title ? `${title} - ` : "";
+title += "Steffen Beisenherz";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title></head
+  >
+
+  <body class="bg-gray-900 text-gray-300">
+    <Navbar links={links} />
+    <div class="flex flex-row">
+      <div class="basis-1/4"></div>
+      <main class="my-4 flex flex-col px-4">
+        <slot />
+      </main>
+      <div class="basis-1/4"></div>
+    </div>
+  </body>
+</html>

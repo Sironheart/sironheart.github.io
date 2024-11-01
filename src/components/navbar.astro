@@ -1,0 +1,19 @@
+---
+import NavbarComponent from "./navbar/index.astro";
+import NavbarLink from "./navbar/link.astro";
+
+export interface Link {
+  href: string;
+  text: string;
+}
+
+interface Props {
+  links: Link[];
+}
+
+const { links } = Astro.props;
+---
+
+<NavbarComponent>
+  {links.map((link) => <NavbarLink href={link.href}>{link.text}</NavbarLink>)}
+</NavbarComponent>

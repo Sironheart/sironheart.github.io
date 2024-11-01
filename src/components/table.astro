@@ -1,0 +1,28 @@
+---
+export interface Props {
+  header: string[];
+  rows: string[][];
+}
+const props = Astro.props as Props;
+---
+
+<table
+  class="my-4 w-4/5 table-auto border-collapse border-spacing-0 justify-self-center border-gray-700"
+>
+  <thead class="bg-gray-700">
+    <tr>
+      {props.header.map((header) => <th class="p-2">{header}</th>)}
+    </tr>
+  </thead>
+  <tbody class="text-center">
+    {
+      props.rows.map((row) => (
+        <tr>
+          {row.map((cell) => (
+            <td class="border border-gray-700 p-2">{cell}</td>
+          ))}
+        </tr>
+      ))
+    }
+  </tbody>
+</table>
