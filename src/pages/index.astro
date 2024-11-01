@@ -1,4 +1,5 @@
 ---
+import Heading from "../components/heading.astro";
 import Table from "../components/table.astro";
 import { type Props as TableProps } from "../components/table.astro";
 import { default as Layout } from "../layouts/BaseLayout.astro";
@@ -14,8 +15,8 @@ const tableProps: TableProps = {
 ---
 
 <Layout>
-  <h1 class="mb-4 mt-8 text-center text-3xl">Welcome!</h1>
-  <div class="text-center">
+  <Heading>Welcome!</Heading>
+  <div>
     I'm Steffen and I am a developer from Germany. Past positions included me
     using:
     <Table header={tableProps.header} rows={tableProps.rows} />
@@ -23,7 +24,7 @@ const tableProps: TableProps = {
     Gitlab CI, AWS, Terraform, Pulumi, Ansible, and many more.
   </div>
 
-  <p class="mt-8 text-center">
+  <p class="mt-8">
     You can find me on the following platforms:
     <ul class="list-disc self-center">
       <li>

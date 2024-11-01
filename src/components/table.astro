@@ -7,14 +7,14 @@ const props = Astro.props as Props;
 ---
 
 <table
-  class="my-4 w-4/5 table-auto border-collapse border-spacing-0 justify-self-center border-gray-700"
+  class="my-4 w-full table-auto border-collapse border-spacing-0 justify-self-center border-gray-700 md:w-4/5"
 >
   <thead class="bg-gray-700">
     <tr>
       {props.header.map((header) => <th class="p-2">{header}</th>)}
     </tr>
   </thead>
-  <tbody class="text-center">
+  <tbody>
     {
       props.rows.map((row) => (
         <tr>
