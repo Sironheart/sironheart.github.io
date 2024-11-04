@@ -8,20 +8,19 @@ export interface Props {
 }
 
 const props = Astro.props;
+
+const hrClasses =
+  "h-px w-40 place-self-center border-0 border-t border-solid border-gray-700 p-0 my-2";
 ---
 
 <div
-  class="col-auto row-auto mx-4 my-2 table h-full self-center rounded-xl border border-gray-600 px-4 py-2"
+  class="col-auto row-auto mx-4 my-2 flex h-full flex-col rounded-xl border border-gray-600 p-4 text-center"
 >
   <p class="text-lg font-bold">{props.title}</p>
-  <hr
-    class="m-2 block h-px w-40 justify-self-center border-0 border-t border-solid border-gray-700 p-0"
-  />
+  <hr class={hrClasses} />
   <p class="text-sm">{props.company} - {props.location}</p>
   <p class="text-sm">{props.time}</p>
 
-  <hr
-    class="m-2 block h-px w-40 justify-self-center border-0 border-t border-solid border-gray-700 p-0"
-  />
-  <p class="">{props.description}</p>
+  <hr class={hrClasses} />
+  <p>{props.description}</p>
 </div>

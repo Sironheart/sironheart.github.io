@@ -33,11 +33,11 @@ title += "Steffen Beisenherz";
   <body class="bg-gray-900 text-gray-300">
     <Navbar links={links} />
     <div class="flex flex-row text-center">
-      <div class="basis-1/4"></div>
-      <main class="my-4 flex flex-col px-4">
+      <div class="hidden md:block md:basis-1/4"></div>
+      <main class="my-4 flex flex-col px-4 md:basis-1/2">
         <slot />
       </main>
-      <div class="basis-1/4"></div>
+      <div class="hidden md:block md:basis-1/4"></div>
     </div>
   </body>
 </html>
