@@ -1,0 +1,23 @@
+---
+import type { CollectionEntry } from "astro:content";
+import HorizontalRow from "./horizontalRow.astro";
+
+interface Props {
+  post: CollectionEntry<"blog">;
+}
+
+const { post } = Astro.props;
+---
+
+<a href={`/blog/${post.slug}`}>
+  <article
+    class="col-auto row-auto mx-4 my-2 h-full flex-col rounded-xl border border-gray-600 p-4 text-center"
+  >
+    <h2 class="text-2xl">{post.data.title}</h2>
+    <p class="text-xs">
+      published at: {post.data.publishedAt.toLocaleDateString()}
+    </p>
+    <HorizontalRow />
+    <p>{post.data.description}</p>
+  </article>
+</a>

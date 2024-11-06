@@ -1,0 +1,25 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import HorizontalRow from "../components/horizontalRow.astro";
+import Heading from "../components/heading.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  publishedAt: Date;
+  image?: string;
+}
+
+const { title, description, publishedAt, image } = Astro.props;
+---
+
+<BaseLayout title={title}>
+  <Heading>{title}</Heading>
+  {image && <img src={image} alt={title} />}
+  <p class="pb-4">{description}</p>
+  <span class="text-xs">published at: {publishedAt.toLocaleDateString()}</span>
+  <article class="text-start">
+    <HorizontalRow />
+    <slot />
+  </article>
+</BaseLayout>
