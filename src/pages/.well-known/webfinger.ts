@@ -23,7 +23,7 @@ export async function GET({ url }: APIContext) {
       links: [
         {
           rel: "http://openid.net/specs/connect/1.0/issuer",
-          href: "https://auth.beisenherz.dev",
+          href: "https://auth.beisenherz.dev/application/o/main/",
         },
       ],
     }),
