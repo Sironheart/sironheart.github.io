@@ -1,11 +1,11 @@
 ---
-import { getCollection, getEntry, type CollectionEntry } from "astro:content";
+import { getCollection, getEntry, render, type CollectionEntry } from "astro:content";
 import { default as Layout } from "../../layouts/BlogPostLayout.astro";
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection("blog");
   return blogEntries.map((entry: CollectionEntry<"blog">) => ({
-    params: { slug: entry.slug },
+    params: { slug: entry.id },
     props: { entry },
   }));
 }
@@ -21,7 +21,7 @@ if (!entry) {
   throw new Error("No entry found");
 }
 
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 ---
 
 <Layout
