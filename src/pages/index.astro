@@ -1,43 +1,106 @@
 ---
-import Heading from "../components/heading.astro";
-import Table from "../components/table.astro";
-import { type Props as TableProps } from "../components/table.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+import Post from "../components/post.astro";
 import { default as Layout } from "../layouts/BaseLayout.astro";
+import { jobs } from "../data/jobs";
 
-const tableProps: TableProps = {
-  header: ["Language", "Frameworks/Libraries"],
-  rows: [
-    ["PHP", "Symfony, Shopware, Doctrine, Laravel"],
-    ["Javascript / Typescript", "VueJS, React, Astro"],
-    ["Kotlin", "Spring Boot, Ktor"],
-  ],
-};
+const blogPosts = await getCollection("blog");
+
+blogPosts.sort((a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) => {
+  return a.data.publishedAt > b.data.publishedAt ? -1 : 1;
+});
+
+const featuredPosts = blogPosts.slice(0, 3);
+const recentRoles = jobs.slice(0, 3);
 ---
 
 <Layout>
-  <Heading>Welcome!</Heading>
-  <div>
-    I'm Steffen and I am a developer from Germany. Past positions included me
-    using:
-    <Table header={tableProps.header} rows={tableProps.rows} />
-    Other tools that I have used include, but are not limited to: Docker, Kubernetes,
-    Gitlab CI, AWS, Terraform, Pulumi, Ansible, and many more.
+  <section class="hero-panel">
+    <p class="eyebrow">Software developer in Germany</p>
+    <h1 class="hero-title">
+      Building software with a strong backend, platform, and DevOps mindset.
+    </h1>
+    <p class="lede">
+      I&apos;m Steffen Beisenherz. I work on backend systems, developer tooling,
+      platform engineering, and the operational side of reliable software.
+    </p>
+
+    <div class="hero-links">
+      <a href="https://github.com/Sironheart" class="link-chip">GitHub</a>
+      <a href="https://x.com/S_ironheart" class="link-chip">Twitter / X</a>
+      <a href="https://bsky.app/profile/beisenherz.dev" class="link-chip"
+        >Bluesky</a
+      >
+    </div>
+  </section>
+
+  <div class="home-grid">
+    <section class="section-card">
+      <p class="eyebrow">What I do</p>
+      <h2 class="section-title">
+        Software development with a backend and platform focus.
+      </h2>
+
+      <div class="summary-list">
+        <article class="summary-entry">
+          <p class="summary-meta">Backend engineering</p>
+          <h3 class="summary-title">
+            I build APIs, services, integrations, and internal tools.
+          </h3>
+        </article>
+
+        <article class="summary-entry">
+          <p class="summary-meta">Platform and DevOps</p>
+          <h3 class="summary-title">
+            I work comfortably across infrastructure, delivery, and operations.
+          </h3>
+        </article>
+
+        <article class="summary-entry">
+          <p class="summary-meta">Developer experience</p>
+          <h3 class="summary-title">
+            I care about workflows that make teams faster and systems easier to
+            maintain.
+          </h3>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <p class="eyebrow">Recent work</p>
+      <h2 class="section-title">
+        Currently building better developer workflows at RTL Technology.
+      </h2>
+
+      <div class="summary-list">
+        {
+          recentRoles.map((job) => (
+            <article class="summary-entry">
+              <p class="summary-meta">
+                {job.time} / {job.company}
+              </p>
+              <h3 class="summary-title">{job.title}</h3>
+            </article>
+          ))
+        }
+      </div>
+
+      <a href="/about" class="inline-action">See the full timeline</a>
+    </section>
   </div>
 
-  <p class="mt-8">
-    You can find me on the following platforms:
-    <ul class="list-disc self-center">
-      <li>
-        <a href="https://github.com/Sironheart" class="underline">GitHub</a>
-      </li>
-      <li>
-        <a href="https://x.com/S_ironheart" class="underline">Twitter / X</a>
-      </li>
-      <li>
-        <a href="https://bsky.app/profile/beisenherz.dev" class="underline"
-          >Bluesky</a
-        >
-      </li>
-    </ul>
-  </p>
+  <section class="section-card">
+    <div class="section-header-row">
+      <div>
+        <p class="eyebrow">Writing</p>
+        <h2 class="section-title">Recent notes from the blog.</h2>
+      </div>
+
+      <a href="/blog" class="inline-action">Browse all posts</a>
+    </div>
+
+    <div class="post-grid">
+      {featuredPosts.map((post) => <Post post={post} />)}
+    </div>
+  </section>
 </Layout>

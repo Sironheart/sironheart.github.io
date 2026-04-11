@@ -1,0 +1,28 @@
+<button
+  type="button"
+  class="theme-toggle"
+  data-theme-toggle
+  aria-label="Toggle color theme"
+  aria-pressed="false"
+>
+  <span class="theme-toggle-label">Theme</span>
+  <span class="theme-toggle-value" data-theme-label>Light</span>
+</button>
+
+<script is:inline>
+  const attachThemeToggle = () => {
+    document.querySelectorAll("[data-theme-toggle]").forEach((toggle) => {
+      if (toggle.dataset.bound === "true") {
+        return;
+      }
+
+      toggle.dataset.bound = "true";
+      toggle.addEventListener("click", () => window.__toggleTheme?.());
+    });
+
+    window.__syncThemeToggle?.();
+  };
+
+  attachThemeToggle();
+  document.addEventListener("astro:page-load", attachThemeToggle);
+</script>

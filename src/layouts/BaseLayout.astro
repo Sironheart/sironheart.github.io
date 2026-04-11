@@ -8,6 +8,7 @@ interface Props {
 }
 
 let { title } = Astro.props;
+const currentPath = Astro.url.pathname;
 
 const links: NavbarLink[] = [
   { href: "/", text: "Home" },
@@ -17,30 +18,88 @@ const links: NavbarLink[] = [
 
 title = title ? `${title} - ` : "";
 title += "Steffen Beisenherz";
+
+const themeSetupScript = `
+(() => {
+  const storageKey = "theme-preference";
+  const light = "light";
+  const dark = "dark";
+  const themeColors = {
+    light: "#FFFCF0",
+    dark: "#100F0F",
+  };
+  const media = window.matchMedia("(prefers-color-scheme: dark)");
+
+  const getStoredTheme = () => {
+    const value = window.localStorage.getItem(storageKey);
+    return value === light || value === dark ? value : null;
+  };
+
+  const getPreferredTheme = () => getStoredTheme() ?? (media.matches ? dark : light);
+
+  const applyTheme = (theme) => {
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme;
+    document
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute("content", themeColors[theme]);
+    window.__syncThemeToggle?.();
+  };
+
+  window.__toggleTheme = () => {
+    const nextTheme = getPreferredTheme() === dark ? light : dark;
+    window.localStorage.setItem(storageKey, nextTheme);
+    applyTheme(nextTheme);
+  };
+
+  window.__syncThemeToggle = () => {
+    const activeTheme = document.documentElement.dataset.theme || getPreferredTheme();
+
+    document.querySelectorAll("[data-theme-toggle]").forEach((toggle) => {
+      toggle.setAttribute("aria-pressed", String(activeTheme === dark));
+      const label = toggle.querySelector("[data-theme-label]");
+      if (label) {
+        label.textContent = activeTheme === dark ? "Dark" : "Light";
+      }
+    });
+  };
+
+  applyTheme(getPreferredTheme());
+
+  if (typeof media.addEventListener === "function") {
+    media.addEventListener("change", (event) => {
+      if (!getStoredTheme()) {
+        applyTheme(event.matches ? dark : light);
+      }
+    });
+  }
+})();
+`;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta
       name="description"
       content="Personal homepage of Steffen Beisenherz"
     />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="theme-color" content="#FFFCF0" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title></head
-  >
+    <script is:inline set:html={themeSetupScript} />
+    <title>{title}</title>
+  </head>
 
-  <body class="bg-gray-900 text-gray-300">
-    <Navbar links={links} />
-    <div class="flex w-full flex-col items-center justify-center text-center">
-      <main class="my-4 flex w-full max-w-6xl flex-col px-4 md:w-3/5">
+  <body>
+    <div class="page-shell">
+      <Navbar links={links} currentPath={currentPath} />
+      <main class="site-shell page-content">
         <slot />
       </main>
     </div>

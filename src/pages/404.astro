@@ -4,9 +4,21 @@ import Heading from "../components/heading.astro";
 ---
 
 <Layout title="404">
-  <div class="flex h-full w-full flex-col justify-center align-middle">
-    <Heading>404 - Page not found</Heading>
-    <img src="/armadillo-sorry.png" alt="Armadillo being sorry" />
-    <p>The page you are looking for does not exist.</p>
-  </div>
+  <section class="not-found-card">
+    <div class="about-copy">
+      <p class="eyebrow">404</p>
+      <Heading>Page not found</Heading>
+      <p class="lede">
+        The page you were looking for does not exist, moved elsewhere, or was
+        never published.
+      </p>
+      <a href="/" class="inline-action">Return to the homepage</a>
+    </div>
+
+    <img
+      src="/armadillo-sorry.png"
+      alt="Armadillo being sorry"
+      class="not-found-image"
+    />
+  </section>
 </Layout>
