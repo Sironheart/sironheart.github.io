@@ -10,11 +10,31 @@ blogPosts.sort((a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) => {
   // Sort by date descending
   return a.data.publishedAt > b.data.publishedAt ? -1 : 1;
 });
+
+const [featuredPost, ...otherPosts] = blogPosts;
 ---
 
 <Layout title="Blog">
-  <Heading>Blog</Heading>
-  <div class="grid grid-flow-row gap-4 md:grid-cols-2">
-    {blogPosts.map((post: CollectionEntry<"blog">) => <Post post={post} />)}
-  </div>
+  <section class="page-intro">
+    <p class="eyebrow">Writing</p>
+    <Heading
+      >Notes on software, tools, and the things I learn along the way.</Heading
+    >
+    <p class="lede">
+      A small archive of thoughts on backend development, platforms, and the
+      occasional conference or career turn.
+    </p>
+  </section>
+
+  {featuredPost && <Post post={featuredPost} featured={true} />}
+
+  {
+    otherPosts.length > 0 && (
+      <div class="post-grid">
+        {otherPosts.map((post) => (
+          <Post post={post} />
+        ))}
+      </div>
+    )
+  }
 </Layout>

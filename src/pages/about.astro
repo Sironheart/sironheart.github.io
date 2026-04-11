@@ -1,95 +1,57 @@
 ---
+import { Image } from "astro:assets";
 import { default as Layout } from "../layouts/BaseLayout.astro";
 import Heading from "../components/heading.astro";
-import {
-  default as Job,
-  type Props as JobProps,
-} from "../components/job.astro";
-
-const jobs: JobProps[] = [
-  {
-    title: "Developer Experience Engineer",
-    company: "RTL Technology GmbH",
-    location: "remote",
-    time: "2024-07 - now",
-    description: "Building tooling to improve the everyday life of developers.",
-  },
-  {
-    title: "Backend Developer",
-    company: "RTL Technology GmbH",
-    location: "remote",
-    time: "2022-03 - 2024-06",
-    description:
-      "Working in the Customer Engagement team to automate customer communication via email, push and in-app notifications.",
-  },
-  {
-    title: "Shopware Developer",
-    company: "Kellerkinder GmbH",
-    location: "remote",
-    time: "2020-10 - 2022-02",
-    description:
-      "Implementing custom Shopware solutions for customers, as well as maintaining most payment provider plugins.",
-  },
-  {
-    title: "Fullstack Developer",
-    company: "SHOPMACHER eCommerce GmbH & Co. KG",
-    location: "Gescher, Germany",
-    time: "2019-08 - 2020-09",
-    description:
-      "Maintaining and developing custom e-commerce solutions for customers with different frameworks, including Shopware, Oxid and Shopify.",
-  },
-  {
-    title: "Core Developer",
-    company: "shopware AG",
-    location: "Schöppingen, Germany",
-    time: "2019-02 - 2019-07",
-    description:
-      "Helping in the initial development of Shopware 6, as well as maintaining the Shopware 5 platform.",
-  },
-  {
-    title: "Fullstack Developer",
-    company: "Guthand GmbH",
-    location: "Dortmund, Germany",
-    time: "2018-10 - 2018-11",
-    description:
-      "Building custom webpages using the Symfony framework and CMS systems.",
-  },
-  {
-    title: "Junior Fullstack Developer",
-    company: "Mauve Mailorder Software GmbH & Co. KG",
-    location: "Essen, Germany",
-    time: "2017-03 - 2018-09",
-    description:
-      "Provinding a custom e-commerce framework specialized on pharmacies, either as a default solution or customer specific implementation.",
-  },
-];
+import Job from "../components/job.astro";
+import { jobs } from "../data/jobs";
+import portraitImage from "../assets/me.jpg";
 ---
 
 <Layout title="About">
-  <Heading>About</Heading>
-
-  <p>
-    My name is Steffen Beisenherz, I am a software developer and I live in
-    Sch&#246;ppingen, Germany. I love working on a good developer experience and
-    the cloud.
-  </p>
-
-  <div class="py-4 md:flex md:flex-auto md:justify-around md:gap-8">
-    <img
-      src="/me.jpg"
-      alt="Steffen Beisenherz"
-      class="m-4 mx-auto h-48 w-48 rounded-full md:flex-none"
-    />
-    <p class="content-center md:w-1/2">
-      In my free time I like to play games (video and board games), learn about
-      different technologies (such as Rust, Go, Elixir, Kubernetes, Pulumi,
-      etc.) and do bouldering.
+  <section class="page-intro">
+    <p class="eyebrow">About</p>
+    <Heading>Steffen Beisenherz</Heading>
+    <p class="lede">
+      I&apos;m a software developer living in Sch&#246;ppingen, Germany. I care
+      a lot about developer experience, cloud-native systems, and software that
+      feels considered from the inside out.
     </p>
-  </div>
+  </section>
 
-  <h2 class="my-4 text-2xl">Jobs and timeslot</h2>
+  <section class="about-overview">
+    <div class="about-copy">
+      <p>
+        My day-to-day work is usually somewhere between backend engineering,
+        internal tooling, and the small details that make developers happier to
+        work with a system.
+      </p>
+      <p>
+        Outside of work I like games, both digital and analog, learning new
+        technologies like Rust, Go, Elixir, Kubernetes, and Pulumi, and spending
+        time bouldering.
+      </p>
+    </div>
 
-  <div class="gap grid grid-flow-row gap-y-4 md:grid-cols-2">
-    {jobs.map((job) => <Job {...job} />)}
-  </div>
+    <div class="portrait-frame">
+      <Image
+        src={portraitImage}
+        alt="Steffen Beisenherz"
+        class="about-portrait"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
+  </section>
+
+  <section class="section-card">
+    <p class="eyebrow">Career timeline</p>
+    <h2 class="section-title">
+      Roles across developer tooling, backend products, and e-commerce
+      platforms.
+    </h2>
+
+    <div class="timeline">
+      {jobs.map((job) => <Job {...job} />)}
+    </div>
+  </section>
 </Layout>

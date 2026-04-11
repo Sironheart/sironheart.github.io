@@ -1,6 +1,5 @@
 ---
-import NavbarComponent from "./navbar/index.astro";
-import NavbarLink from "./navbar/link.astro";
+import ThemeToggle from "./theme-toggle.astro";
 
 export interface Link {
   href: string;
@@ -9,11 +8,38 @@ export interface Link {
 
 interface Props {
   links: Link[];
+  currentPath: string;
 }
 
-const { links } = Astro.props;
+const { links, currentPath } = Astro.props;
+
+const isActive = (href: string) =>
+  href === "/" ? currentPath === href : currentPath.startsWith(href);
 ---
 
-<NavbarComponent>
-  {links.map((link) => <NavbarLink href={link.href}>{link.text}</NavbarLink>)}
-</NavbarComponent>
+<header class="site-shell">
+  <nav class="site-nav" aria-label="Primary">
+    <a href="/" class="brand-link" aria-label="Beisenherz home">
+      <span class="brand-name">Beisenherz</span>
+      <span class="brand-tag">developer notes</span>
+    </a>
+
+    <div class="nav-cluster">
+      <div class="nav-links">
+        {
+          links.map((link) => (
+            <a
+              href={link.href}
+              class="nav-link"
+              aria-current={isActive(link.href) ? "page" : undefined}
+            >
+              {link.text}
+            </a>
+          ))
+        }
+      </div>
+
+      <ThemeToggle />
+    </div>
+  </nav>
+</header>
