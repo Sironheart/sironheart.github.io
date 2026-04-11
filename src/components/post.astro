@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 
 interface Props {
@@ -21,7 +22,7 @@ const publishedAt = post.data.publishedAt.toLocaleDateString("en-US", {
 >
   {
     post.data.image && (
-      <img
+      <Image
         src={post.data.image}
         alt={post.data.title}
         class="post-card-image"

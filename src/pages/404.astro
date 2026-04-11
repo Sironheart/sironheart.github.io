@@ -1,6 +1,8 @@
 ---
+import { Image } from "astro:assets";
 import { default as Layout } from "../layouts/BaseLayout.astro";
 import Heading from "../components/heading.astro";
+import armadilloImage from "../assets/armadillo-sorry.png";
 ---
 
 <Layout title="404">
@@ -15,8 +17,8 @@ import Heading from "../components/heading.astro";
       <a href="/" class="inline-action">Return to the homepage</a>
     </div>
 
-    <img
-      src="/armadillo-sorry.png"
+    <Image
+      src={armadilloImage}
       alt="Armadillo being sorry"
       class="not-found-image"
     />

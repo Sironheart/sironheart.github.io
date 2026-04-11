@@ -1,8 +1,10 @@
 ---
+import { Image } from "astro:assets";
 import { default as Layout } from "../layouts/BaseLayout.astro";
 import Heading from "../components/heading.astro";
 import Job from "../components/job.astro";
 import { jobs } from "../data/jobs";
+import portraitImage from "../assets/me.jpg";
 ---
 
 <Layout title="About">
@@ -31,7 +33,13 @@ import { jobs } from "../data/jobs";
     </div>
 
     <div class="portrait-frame">
-      <img src="/me.jpg" alt="Steffen Beisenherz" class="about-portrait" />
+      <Image
+        src={portraitImage}
+        alt="Steffen Beisenherz"
+        class="about-portrait"
+        loading="eager"
+        fetchpriority="high"
+      />
     </div>
   </section>
 

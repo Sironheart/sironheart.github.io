@@ -1,7 +1,7 @@
 ---
 title: First talk on a conference - pre event thoughts
 publishedAt: 2023-06-19
-image: "/jcon-europe-2023.png"
+image: "./jcon-europe-2023.png"
 description: I got accepted as a speaker. Here are my thoughts right before the event.
 ---
 
