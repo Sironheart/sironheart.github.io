@@ -1,7 +1,5 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
-import HorizontalRow from "../components/horizontalRow.astro";
-import Heading from "../components/heading.astro";
 
 interface Props {
   title: string;
@@ -11,15 +9,35 @@ interface Props {
 }
 
 const { title, description, publishedAt, image } = Astro.props;
+
+const formattedDate = publishedAt.toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
 ---
 
 <BaseLayout title={title}>
-  <Heading>{title}</Heading>
-  {image && <img src={image} alt={title} />}
-  <p class="pb-4">{description}</p>
-  <span class="text-xs">published at: {publishedAt.toLocaleDateString()}</span>
-  <article class="text-start">
-    <HorizontalRow />
-    <slot />
+  <article class="article-shell">
+    <a href="/blog" class="back-link">Back to blog</a>
+
+    <header class="article-header">
+      <p class="eyebrow">Blog</p>
+      <h1 class="article-title">{title}</h1>
+      <p class="article-lede">{description}</p>
+      <p class="article-meta">Published {formattedDate}</p>
+    </header>
+
+    {
+      image && (
+        <div class="article-image-frame">
+          <img src={image} alt={title} class="article-image" />
+        </div>
+      )
+    }
+
+    <div class="article-content">
+      <slot />
+    </div>
   </article>
 </BaseLayout>
