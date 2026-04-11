@@ -1,7 +1,7 @@
 ---
 title: Quarkus and Kotlin
 publishedAt: 2022-05-29
-image: "/quarkus.png"
+image: "./quarkus.png"
 description: "I have been using Quarkus for the last week, what did I learn?"
 ---
 
@@ -46,7 +46,7 @@ but Spring broadly uses. All in all this causes smaller memory usage for Quarkus
 on runtime, which saves code, but also a lot better startup times for Quarkus. I'll append an image from the Quarkus
 Page, which tries to make this more clear.
 
-![Quarkus vs Spring](/metrics.png)
+![Quarkus vs Spring](./metrics.png)
 
 The 'Traditional Cloud Native Stack' means usage of frameworks such as Spring, Micronaut or similar stacks.
 

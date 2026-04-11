@@ -1,7 +1,7 @@
 ---
 title: Parting ways with PHP
 publishedAt: 2022-05-20
-image: "/parting-ways-with-php.png"
+image: "./parting-ways-with-php.png"
 description: I moved from writing PHP for a living. What do I have left to say?
 ---
 
