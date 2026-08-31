@@ -8,15 +8,15 @@ export interface JobEntry {
 
 export const jobs: JobEntry[] = [
   {
-    title: "Developer Experience Engineer",
-    company: "RTL Technology GmbH",
+    title: "Senior Developer Experience Engineer",
+    company: "Bedrock Streaming Germany, prev. RTL Technology GmbH",
     location: "remote",
     time: "2024-07 - now",
     description: "Building tooling to improve the everyday life of developers.",
   },
   {
-    title: "Backend Developer",
-    company: "RTL Technology GmbH",
+    title: "Senior Backend Developer",
+    company: "Bedrock Streaming Germany, prev. RTL Technology GmbH",
     location: "remote",
     time: "2022-03 - 2024-06",
     description:
