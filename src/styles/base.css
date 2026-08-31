@@ -182,7 +182,7 @@ select {
 }
 
 .brand-tag {
-  @apply font-code text-r076 text-copy-muted lowercase;
+  @apply font-code text-r076 text-copy-muted;
   letter-spacing: 0.08em;
 }
 
